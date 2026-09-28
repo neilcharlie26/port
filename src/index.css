@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --bg: #06101f;
+  --bg-secondary: #0a1628;
+  --bg-card: #0d1b2e;
+  --bg-card-2: #0f2040;
+  --text: #e2e8f0;
+  --text-muted: #8ba3c0;
+  --text-dim: #4a6280;
+  --border: rgba(0, 212, 255, 0.1);
+  --border-solid: #1a2d45;
+  --accent: #00d4ff;
+  --accent-2: #0ea5e9;
+  --accent-dim: rgba(0, 212, 255, 0.08);
+  --accent-hover: rgba(0, 212, 255, 0.14);
+  --navy: #1e3a5f;
+  --green: #22d3a0;
+}
+
+[data-theme="light"] {
+  --bg: #f0f4f8;
+  --bg-secondary: #e4edf5;
+  --bg-card: #ffffff;
+  --bg-card-2: #f8fafc;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #94a3b8;
+  --border: rgba(14, 165, 233, 0.15);
+  --border-solid: #e2e8f0;
+  --accent: #0284c7;
+  --accent-2: #0369a1;
+  --accent-dim: rgba(2, 132, 199, 0.08);
+  --accent-hover: rgba(2, 132, 199, 0.14);
+  --navy: #1e3a5f;
+  --green: #059669;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+}
+
+.font-mono, code, pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; opacity: 0.5; }
+
+::selection { background: rgba(0, 212, 255, 0.18); color: var(--accent); }
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+[data-theme="light"] .grid-bg {
+  background-image:
+    linear-gradient(rgba(2, 132, 199, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(2, 132, 199, 0.05) 1px, transparent 1px);
+}
+
+.accent-glow {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), 0 0 40px rgba(0, 212, 255, 0.05);
+}
+
+[data-theme="light"] .accent-glow {
+  box-shadow: 0 0 20px rgba(2, 132, 199, 0.15), 0 0 40px rgba(2, 132, 199, 0.05);
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 212, 255, 0.3) !important;
+  box-shadow: 0 8px 30px rgba(0, 212, 255, 0.08);
+}
+
+[data-theme="light"] .card-hover:hover {
+  border-color: rgba(2, 132, 199, 0.3) !important;
+  box-shadow: 0 8px 30px rgba(2, 132, 199, 0.08);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.float { animation: float 4s ease-in-out infinite; }
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin-top: 12px;
+  border-radius: 2px;
+}
+
+.gemini-mark {
+  display: inline-block;
+  border-radius: 44% 56% 46% 54%;
+  background: conic-gradient(from 210deg, #5f86ec, #9b72cb 26%, #d96570 48%, #f2a65a 66%, #77b5f9 84%, #5f86ec);
+  clip-path: polygon(50% 0, 61% 35%, 100% 50%, 63% 63%, 50% 100%, 37% 64%, 0 50%, 37% 36%);
+  filter: drop-shadow(0 0 9px rgba(138, 180, 248, 0.35));
+}
+
+.gemini-text {
+  background: linear-gradient(92deg, #8ab4f8 4%, #c58af9 42%, #f28b82 78%, #fdd663 105%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
