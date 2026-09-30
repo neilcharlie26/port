@@ -2,7 +2,7 @@ import { GraduationCap, Globe, Database, Network, Wrench, FileText } from "lucid
 import SectionHeading from "./SectionHeading"
 
 const facts = [
-  { icon: GraduationCap, label: "Education", value: "BS Information Systems", color: "#818cf8" },
+  { icon: GraduationCap, label: "Education", value: "BS Information Systems Graduate", color: "#818cf8" },
   { icon: Globe, label: "Web Development", value: "PHP, HTML5, CSS3, JS", color: "var(--accent)" },
   { icon: Database, label: "Database", value: "MySQL & Supabase", color: "#f59e0b" },
   { icon: Globe, label: "Mobile Development", value: "React Native & Expo", color: "#38bdf8" },
@@ -57,7 +57,7 @@ export default function About() {
             <SectionHeading tag="Who I Am" title="About Me" />
             <div className="mt-6 space-y-4 text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
               <p>
-                I am <strong style={{ color: "var(--text)" }}>Neil Charlie Rebenque</strong>, a PHP full-stack developer based in the Philippines.
+                I am <strong style={{ color: "var(--text)" }}>Neil Charlie Rebenque</strong>, a BS Information Systems graduate and PHP full-stack developer based in the Philippines.
                 My passion lies in creating practical, efficient, and user-friendly technology solutions that make a real difference.
               </p>
               <p>
