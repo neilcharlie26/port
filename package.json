@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/start.mjs",
     "chat:setup": "node server/setup.mjs",
-    "test:chat": "node --test server/chat.test.mjs server/chat-timeout.test.mjs server/chat-media.test.mjs server/ai.test.mjs",
+    "test:chat": "node --test server/chat.test.mjs server/chat-timeout.test.mjs server/chat-media.test.mjs server/ai.test.mjs server/cloud-chat.test.mjs server/supabase-store.test.mjs",
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",

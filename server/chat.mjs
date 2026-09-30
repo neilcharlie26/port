@@ -135,6 +135,7 @@ export function createChatHandler({ directory = process.env.CHAT_DATA_DIR || '.c
         if (route === 'admin' && req.method === 'GET') return send(200, chats.map(publicChat).sort((a, b) => b.updatedAt - a.updatedAt))
         const chat = chats.find(c => c.id === body.id)
         if (!chat) return send(404, { error: 'Conversation not found.' })
+        if (route === 'admin/upload' && req.method === 'POST') return send(200, { inline: true })
         if (route === 'admin/typing' && req.method === 'POST') {
           typing.set(`${chat.id}:admin`, body.typing === true ? now + 5000 : 0)
           return send(200, { ok: true })
@@ -157,6 +158,7 @@ export function createChatHandler({ directory = process.env.CHAT_DATA_DIR || '.c
       // Renew the same browser identity on every visit; never replace an existing thread.
       if (chat) cookie('visitor_session', chat.secret, visitorCookieAge)
       if (route === 'visitor' && req.method === 'GET') return send(200, chat ? publicChat(chat) : null)
+      if (route === 'upload' && req.method === 'POST') return chat ? send(200, { inline: true }) : send(404, { error: 'Conversation not found.' })
       if (route === 'retry' && req.method === 'POST') {
         if (!chat) return send(404, { error: 'Conversation not found.' })
         await answer(chat); return send(200, publicChat(chat))

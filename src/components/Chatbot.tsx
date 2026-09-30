@@ -57,8 +57,8 @@ export default function Chatbot() {
       if (chat) { setConversation(chat); setMessages(chat.messages) }
       else { setConversation(null); setMessages(restoreAssistantHistory()) }
       setError(chat?.aiError || '')
-    }).catch(() => {
-      if (alive) { setRestoreFailed(true); setError('Could not load your saved conversation. Retry to continue where you left off.') }
+    }).catch((error: Error) => {
+      if (alive) { setRestoreFailed(true); setError(error.message) }
     }).finally(() => { if (alive) setRestoring(false) })
     return () => { alive = false; generation.current++ }
   }, [restoreAttempt])

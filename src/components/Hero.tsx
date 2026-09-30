@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import profileImage from "../../profpic.png"
 import { GitFork, Briefcase, Users, Mail, ChevronDown, Download, Eye, ArrowRight } from "lucide-react"
 
 const titles = [
@@ -176,7 +177,7 @@ export default function Hero() {
                 }}
               >
                 <img
-                  src="./profpic.png"
+                  src={profileImage}
                   alt="Neil Charlie Rebenque"
                   className="w-full h-full object-cover"
                 />

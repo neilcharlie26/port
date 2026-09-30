@@ -2,6 +2,9 @@ import { useState } from "react"
 import { GitFork, ExternalLink, X, ChevronRight, Star } from "lucide-react"
 import SectionHeading from "./SectionHeading"
 import ntapImage from "../../ntap1.png"
+import prettyboyImage from "../../prettyboy.png"
+import dongImage from "../../dong.png"
+import hraImage from "../../hra.png"
 
 const filters = ["All", "Web Development", "Academic", "Personal", "System"]
 
@@ -25,7 +28,7 @@ const projects = [
     title: "PrettyBoy Motorshop Management System",
     description: "A comprehensive POS, Inventory, Customer, Repair, and Management System for multi-branch motorcycle shops.",
     longDesc: "A full-featured business management system designed specifically for multi-branch motorcycle shops. The system handles everything from point-of-sale transactions to complex inventory management across multiple branches.",
-    image: "./prettyboy.png",
+    image: prettyboyImage,
     category: "System",
     status: "Completed",
     featured: true,
@@ -40,7 +43,7 @@ const projects = [
     id: 2,
     title: "DON G PISTALAN ORDERING MANAGEMENT SYSTEM",
     description: "Designed and implemented a digital ordering system to improve request processing using HTML5, CSS3, JavaScript, PHP, and MySQL.",
-    image: "dong.png",
+    image: dongImage,
     category: "Academic",
     status: "Completed",
     featured: false,
@@ -55,7 +58,7 @@ const projects = [
     id: 3,
     title: "HRA Library Management System",
     description: "A PHP and MySQL based library management system for tracking books, borrowers, and due dates.",
-    image: "hra.png",
+    image: hraImage,
     category: "Academic",
     status: "Completed",
     featured: false,

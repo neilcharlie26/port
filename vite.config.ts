@@ -1,6 +1,8 @@
 import { createAI } from './server/ai.mjs'
 import { defineConfig, loadEnv, type HtmlTagDescriptor, type Plugin } from 'vite'
 import { createChatHandler } from './server/chat.mjs'
+import { createCloudChatHandler } from './server/cloud-chat.mjs'
+import { createSupabaseStore } from './server/supabase-store.mjs'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
@@ -10,7 +12,9 @@ import siteConfiguration from './.figma/make/site.json'
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
-  const chatHandler = createChatHandler({ password: env.ADMIN_PASSWORD, directory: env.CHAT_DATA_DIR || '.chat-data', ai: createAI({ apiKey: env.GROQ_API_KEY, model: env.GROQ_MODEL }) })
+  const chatHandler = () => env.SUPABASE_URL || env.SUPABASE_SECRET_KEY || env.SUPABASE_SERVICE_ROLE_KEY
+    ? createCloudChatHandler({ password: env.ADMIN_PASSWORD, store: createSupabaseStore({ url: env.SUPABASE_URL, key: env.SUPABASE_SECRET_KEY || env.SUPABASE_SERVICE_ROLE_KEY }), ai: createAI({ apiKey: env.GROQ_API_KEY, model: env.GROQ_MODEL }) })
+    : createChatHandler({ password: env.ADMIN_PASSWORD, directory: env.CHAT_DATA_DIR || '.chat-data', ai: createAI({ apiKey: env.GROQ_API_KEY, model: env.GROQ_MODEL }) })
   // .figma/make/deploy-preview passes `--mode development` for cached-preview builds.
   const emitSourcemaps = mode === 'development'
 
@@ -21,7 +25,7 @@ export default defineConfig(({ mode }) => {
       minify: !emitSourcemaps,
     },
     plugins: [
-      { name: 'admin-chat', configureServer(server) { server.middlewares.use(chatHandler) }, configurePreviewServer(server) { server.middlewares.use(chatHandler) } },
+      { name: 'admin-chat', configureServer(server) { server.middlewares.use(chatHandler()) }, configurePreviewServer(server) { server.middlewares.use(chatHandler()) } },
       react(),
       tailwindcss(),
       figmaSiteConfiguration(siteConfiguration),

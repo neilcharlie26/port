@@ -2,9 +2,10 @@ import { createServer } from 'node:http'
 import { existsSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { createChatHandler } from './chat.mjs'
+import { createCloudChatHandler } from './cloud-chat.mjs'
 
 if (existsSync('.env.local')) process.loadEnvFile('.env.local')
-const handler = createChatHandler()
+const handler = process.env.SUPABASE_URL || process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY ? createCloudChatHandler() : createChatHandler()
 const root = path.resolve('dist')
 if (!existsSync(path.join(root, 'index.html'))) throw new Error('Run npm run build first.')
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.woff2': 'font/woff2' }
