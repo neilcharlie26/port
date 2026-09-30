@@ -1,4 +1,5 @@
 import useTyping from '../lib/useTyping'
+import chatbotIcon from '../../chatbot.png'
 import { wantsAdmin } from '../lib/assistant.mjs'
 import { useCallback, useEffect, useRef, useState } from "react"
 import { ArrowUp, ChevronDown, MessageCircle, RotateCcw, Sparkles, X } from "lucide-react"
@@ -20,8 +21,8 @@ function restoreAssistantHistory(): Message[] {
 
 const suggestions = ["Who is Neil?", "What can Neil build?", "Tell me about his best project", "How can I contact him?"]
 
-function AssistantMark({ size = 22 }: { size?: number }) {
-  return <span aria-hidden="true" className="gemini-mark shrink-0" style={{ width: size, height: size }} />
+function AssistantMark({ size = 32 }: { size?: number }) {
+  return <img src={chatbotIcon} alt="" aria-hidden="true" className="shrink-0 rounded-full object-cover" width={size} height={size} style={{ width: size, height: size }} />
 }
 
 export default function Chatbot() {
@@ -157,7 +158,7 @@ export default function Chatbot() {
     <>
       {!open && (
         <button type="button" onClick={() => setOpen(true)} className="group fixed bottom-5 right-5 z-50 flex h-14 items-center gap-2.5 overflow-hidden rounded-full border border-white/10 bg-[#101218] px-4 text-white shadow-[0_16px_48px_rgba(0,0,0,.34)] transition-all duration-300 hover:-translate-y-1 hover:pr-5 sm:bottom-6 sm:right-6" aria-label="Open Neil AI assistant">
-          <AssistantMark size={24} />
+          <AssistantMark size={36} />
           <span className="max-w-0 whitespace-nowrap text-sm font-medium opacity-0 transition-all duration-300 group-hover:max-w-28 group-hover:opacity-100">Ask Neil</span>
           <MessageCircle size={18} className="opacity-70 group-hover:hidden" />
         </button>
@@ -179,7 +180,7 @@ export default function Chatbot() {
           <div className="flex-1 overflow-y-auto px-5 pb-4">
             {messages.length === 0 && !conversation ? (
               <div className="flex min-h-full flex-col justify-center py-4">
-                <AssistantMark size={36} />
+                <AssistantMark size={48} />
                 <h3 className="gemini-text mt-5 text-[30px] font-medium tracking-tight">Hello, I'm Neil's assistant</h3>
                 <p className="mt-2 max-w-sm text-[15px] leading-6 text-[#aeb4bc]">I can help you explore Neil's work, skills, experience, and the ideas behind his projects.</p>
                 <div className="mt-7 grid grid-cols-2 gap-2.5">
@@ -195,7 +196,7 @@ export default function Chatbot() {
                 {messages.length === 0 && <p className="py-8 text-center text-sm text-slate-400">Tell Neil what you need help with below.</p>}
                 {messages.map((message, index) => (
                   <div key={`${message.text}-${index}`} className={`flex gap-3 ${message.from === "user" ? "justify-end" : "justify-start"}`}>
-                    {message.from === "assistant" && <AssistantMark size={22} />}
+                    {message.from === "assistant" && <AssistantMark size={32} />}
                     <div className={message.from === "user" ? "max-w-[82%] break-words rounded-[22px] bg-[#282a2f] px-4 py-3 text-[14px] leading-6" : "max-w-[86%] break-words text-[14px] leading-6 text-[#d9dce1]"}>{message.from === 'admin' && <p className="mb-1 text-xs font-medium text-blue-300">Neil · Admin</p>}<ChatContent message={message} />{message.from === 'user' && conversation && <p className="mt-1 text-right text-[10px] text-slate-400">{(conversation.adminReadCount || 0) > index ? 'Seen by Neil' : 'Sent'}</p>}</div>
                   </div>
                 ))}
