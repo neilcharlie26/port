@@ -2,7 +2,7 @@ import useTyping from '../lib/useTyping'
 import chatbotIcon from '../../chatbot.png'
 import { wantsAdmin } from '../lib/assistant.mjs'
 import { useCallback, useEffect, useRef, useState } from "react"
-import { ArrowUp, ChevronDown, MessageCircle, RotateCcw, Sparkles, X } from "lucide-react"
+import { ArrowUp, ChevronDown, RotateCcw, Sparkles, X } from "lucide-react"
 import { chatApi, type Conversation, type ChatMessage, type Attachment } from '../lib/chat'
 import AttachmentPicker from './AttachmentPicker'
 import ChatContent from './ChatContent'
@@ -22,7 +22,7 @@ function restoreAssistantHistory(): Message[] {
 const suggestions = ["Who is Neil?", "What can Neil build?", "Tell me about his best project", "How can I contact him?"]
 
 function AssistantMark({ size = 32 }: { size?: number }) {
-  return <img src={chatbotIcon} alt="" aria-hidden="true" className="shrink-0 rounded-full object-cover" width={size} height={size} style={{ width: size, height: size }} />
+  return <span aria-hidden="true" className="relative block shrink-0 overflow-hidden rounded-full" style={{ width: size, height: size }}><img src={chatbotIcon} alt="" className="absolute max-w-none object-cover" style={{ width: '114%', height: '114%', left: '-7%', top: '-6%' }} /></span>
 }
 
 export default function Chatbot() {
@@ -157,10 +157,9 @@ export default function Chatbot() {
   return (
     <>
       {!open && (
-        <button type="button" onClick={() => setOpen(true)} className="group fixed bottom-5 right-5 z-50 flex h-14 items-center gap-2.5 overflow-hidden rounded-full border border-white/10 bg-[#101218] px-4 text-white shadow-[0_16px_48px_rgba(0,0,0,.34)] transition-all duration-300 hover:-translate-y-1 hover:pr-5 sm:bottom-6 sm:right-6" aria-label="Open Neil AI assistant">
-          <AssistantMark size={36} />
-          <span className="max-w-0 whitespace-nowrap text-sm font-medium opacity-0 transition-all duration-300 group-hover:max-w-28 group-hover:opacity-100">Ask Neil</span>
-          <MessageCircle size={18} className="opacity-70 group-hover:hidden" />
+        <button type="button" onClick={() => setOpen(true)} className="group fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center overflow-hidden rounded-full bg-[#101218] p-0 text-white shadow-[0_16px_48px_rgba(0,0,0,.34)] transition-[width,transform] duration-300 hover:w-40 hover:-translate-y-1 focus-visible:w-40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-400 motion-reduce:transition-none sm:bottom-6 sm:right-6" aria-label="Open Neil AI assistant">
+          <AssistantMark size={56} />
+          <span className="ml-3 whitespace-nowrap text-sm font-medium opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">Ask Neil</span>
         </button>
       )}
 
